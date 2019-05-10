@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: plan
-  image: alpine
+  image: hashicorp/terraform:light
   environment:
       AWS_ACCESS_KEY_ID:
           from_secret: AWS_ACCESS_KEY_ID
@@ -13,17 +13,13 @@ steps:
           from_secret: AWS_DEFAULT_REGION
           
   commands:
-  - apk --update add curl
-  - curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
-  - unzip terraform.zip ; rm -f terraform.zip; chmod +x terraform
-  - mkdir -p ${HOME}/bin ; export PATH=${PATH}:${HOME}/bin; mv terraform ${HOME}/bin/
   - terraform -v
   - terraform init
   - terraform validate
   - terraform plan
 
 - name: Deploy
-  image: alpine
+  image: hashicorp/terraform:light
   environment:
       AWS_ACCESS_KEY_ID:
           from_secret: AWS_ACCESS_KEY_ID
@@ -33,17 +29,13 @@ steps:
           from_secret: AWS_DEFAULT_REGION
           
   commands:
-  - apk --update add curl
-  - curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
-  - unzip terraform.zip ; rm -f terraform.zip; chmod +x terraform
-  - mkdir -p ${HOME}/bin ; export PATH=${PATH}:${HOME}/bin; mv terraform ${HOME}/bin/
   - terraform -v
   - terraform init
   - terraform validate
   - terraform apply -auto-approve
 
 - name: Destroy
-  image: alpine
+  image: hashicorp/terraform:light
   environment:
       AWS_ACCESS_KEY_ID:
           from_secret: AWS_ACCESS_KEY_ID
@@ -53,10 +45,6 @@ steps:
           from_secret: AWS_DEFAULT_REGION
           
   commands:
-  - apk --update add curl
-  - curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
-  - unzip terraform.zip ; rm -f terraform.zip; chmod +x terraform
-  - mkdir -p ${HOME}/bin ; export PATH=${PATH}:${HOME}/bin; mv terraform ${HOME}/bin/
   - terraform -v
   - terraform init
   - terraform validate
