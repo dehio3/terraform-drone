@@ -18,6 +18,10 @@ steps:
   - terraform validate
   - terraform plan
 
+  when:
+    event:
+    - push
+
 - name: Deploy
   image: hashicorp/terraform:light
   environment:
@@ -34,6 +38,12 @@ steps:
   - terraform validate
   - terraform apply -auto-approve
 
+  when:
+    event:
+    - push
+    branch:
+    - master
+
 - name: Destroy
   image: hashicorp/terraform:light
   environment:
@@ -49,3 +59,9 @@ steps:
   - terraform init
   - terraform validate
   - terraform destroy -auto-approve
+
+  when:
+    event:
+    - push
+    branch:
+    - master
