@@ -59,6 +59,6 @@ steps:
   - terraform validate	
   - terraform destroy -auto-approve	
 
-   when:	
-    branch:	
+  when:
+    branch:
     - master
