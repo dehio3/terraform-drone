@@ -53,7 +53,7 @@ steps:
       AWS_DEFAULT_REGION:	
           from_secret: AWS_DEFAULT_REGION	
 
-   commands:	
+  commands:	
   - terraform -v	
   - terraform init	
   - terraform validate	
