@@ -13,7 +13,6 @@ steps:
           from_secret: AWS_DEFAULT_REGION
           
   commands:
-  - terraform -v
   - terraform init
   - terraform validate
   - terraform plan
@@ -22,15 +21,12 @@ steps:
     event:
     - push
 
-- name: slack
-  image: plugins/slack
-  settings:
-    webhook:
-      from_secret: slack_webhook
-    channel: droneci
-
-    webhook:
-      from_secret: slack_webhook
+#- name: slack
+#  image: plugins/slack
+#  settings:
+#    webhook:
+#      from_secret: slack_webhook
+#    channel: droneci
 
 - name: Deploy
   image: hashicorp/terraform:light
@@ -43,32 +39,9 @@ steps:
           from_secret: AWS_DEFAULT_REGION
           
   commands:
-  - terraform -v
   - terraform init
   - terraform validate
   - terraform apply -auto-approve
-
-  when:
-    event:
-    - push
-    branch:
-    - master
-
-- name: Destroy
-  image: hashicorp/terraform:light
-  environment:
-      AWS_ACCESS_KEY_ID:
-          from_secret: AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY:
-          from_secret: AWS_SECRET_ACCESS_KEY
-      AWS_DEFAULT_REGION:
-          from_secret: AWS_DEFAULT_REGION
-          
-  commands:
-  - terraform -v
-  - terraform init
-  - terraform validate
-  - terraform destroy -auto-approve
 
   when:
     event:
