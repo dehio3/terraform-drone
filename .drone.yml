@@ -17,10 +17,6 @@ steps:
   - terraform validate
   - terraform plan
 
-  when:
-    event:
-    - push
-
 #- name: slack
 #  image: plugins/slack
 #  settings:
@@ -28,7 +24,7 @@ steps:
 #      from_secret: slack_webhook
 #    channel: droneci
 
-- name: Deploy
+- name: deploy
   image: hashicorp/terraform:light
   environment:
       AWS_ACCESS_KEY_ID:
@@ -44,7 +40,25 @@ steps:
   - terraform apply -auto-approve
 
   when:
-    event:
-    - push
     branch:
+    - master
+
+- name: destroy	
+  image: hashicorp/terraform:light	
+  environment:	
+      AWS_ACCESS_KEY_ID:	
+          from_secret: AWS_ACCESS_KEY_ID	
+      AWS_SECRET_ACCESS_KEY:	
+          from_secret: AWS_SECRET_ACCESS_KEY	
+      AWS_DEFAULT_REGION:	
+          from_secret: AWS_DEFAULT_REGION	
+
+   commands:	
+  - terraform -v	
+  - terraform init	
+  - terraform validate	
+  - terraform destroy -auto-approve	
+
+   when:	
+    branch:	
     - master
