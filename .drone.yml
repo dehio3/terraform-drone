@@ -25,8 +25,12 @@ steps:
 - name: slack
   image: plugins/slack
   settings:
-    webhook: https://hooks.slack.com/services/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
+    webhook:
+      from_secret: slack_webhook
     channel: droneci
+
+    webhook:
+      from_secret: slack_webhook
 
 - name: Deploy
   image: hashicorp/terraform:light
