@@ -9,8 +9,6 @@ steps:
           from_secret: AWS_ACCESS_KEY_ID
       AWS_SECRET_ACCESS_KEY:
           from_secret: AWS_SECRET_ACCESS_KEY
-      AWS_DEFAULT_REGION:
-          from_secret: AWS_DEFAULT_REGION
           
   commands:
   - terraform init
@@ -31,8 +29,6 @@ steps:
           from_secret: AWS_ACCESS_KEY_ID
       AWS_SECRET_ACCESS_KEY:
           from_secret: AWS_SECRET_ACCESS_KEY
-      AWS_DEFAULT_REGION:
-          from_secret: AWS_DEFAULT_REGION
           
   commands:
   - terraform init
@@ -49,8 +45,6 @@ steps:
           from_secret: AWS_ACCESS_KEY_ID	
       AWS_SECRET_ACCESS_KEY:	
           from_secret: AWS_SECRET_ACCESS_KEY	
-      AWS_DEFAULT_REGION:	
-          from_secret: AWS_DEFAULT_REGION	
 
   commands:	
   - terraform init	
