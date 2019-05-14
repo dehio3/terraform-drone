@@ -36,7 +36,6 @@ steps:
           
   commands:
   - terraform init
-  - terraform validate
   - terraform apply -auto-approve
 
   when:
@@ -54,9 +53,7 @@ steps:
           from_secret: AWS_DEFAULT_REGION	
 
   commands:	
-  - terraform -v	
   - terraform init	
-  - terraform validate	
   - terraform destroy -auto-approve	
 
   when:
