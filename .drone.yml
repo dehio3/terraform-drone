@@ -23,7 +23,7 @@ steps:
 #      from_secret: slack_webhook
 #    channel: droneci
 
-- name: deploy
+- name: apply
   image: hashicorp/terraform:0.12.9
   environment:
       AWS_ACCESS_KEY_ID:
