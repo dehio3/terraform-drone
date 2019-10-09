@@ -11,10 +11,14 @@ steps:
           from_secret: AWS_SECRET_ACCESS_KEY
           
   commands:
-  - terraform fmt
   - terraform init
   - terraform validate
   - terraform plan
+
+  when:
+    branch:
+      exclude:
+      - master
 
 #- name: slack
 #  image: plugins/slack
